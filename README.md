@@ -1,7 +1,7 @@
 # Ideology-Identifier
 Gender/Political Ideology Identifier for Chinese Social Media Texts
 
-# 当前版本为本地运行的demo，含后端+前端展示。先进行本地运行测试，该版本的效果无大问题后可再进行Flask部署
+*当前版本为本地运行的demo，含后端+前端展示。先进行本地运行测试，该版本的效果无大问题后可再进行Flask部署*
 
 # demo本地运行指南：
 1. 准备本地目录结构:
