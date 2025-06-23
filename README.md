@@ -18,5 +18,5 @@ your_project/
 
 5. 运行
    `python app.py`
-6. 访问浏览器打开：http://localhost:5000
+6. 显示✅ 正在启动服务后，访问浏览器打开：http://localhost:5001/
    就可以输入中文或支持的网页链接，测试分析功能。
