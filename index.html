@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文本意识形态分析器</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; }
+    textarea { width: 100%; height: 150px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 8px 16px; }
+    pre { background: #f6f6f6; padding: 10px; white-space: pre-wrap; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>文本意识形态分析器</h2>
+  <p>请输入中文文本或社交媒体网页链接：</p>
+  <textarea id="input"></textarea>
+  <br />
+  <button onclick="analyze()">分析</button>
+  <div id="result"></div>
+
+  <script>
+    async function analyze() {
+      const text = document.getElementById("input").value.trim();
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "分析中...";
+
+      const response = await fetch("/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        resultDiv.innerHTML = `<p class="error">❌ ${data.error}</p>`;
+        return;
+      }
+
+      let html = '<h3>分析结果：</h3>';
+      for (const label in data) {
+        const item = data[label];
+        html += `<p><strong>${label}</strong>: ${item.score}%`;
+        if (item.keywords.length > 0) {
+          html += `（关键词：${item.keywords.join(", ")}）`;
+        }
+        html += '</p>';
+      }
+      resultDiv.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
